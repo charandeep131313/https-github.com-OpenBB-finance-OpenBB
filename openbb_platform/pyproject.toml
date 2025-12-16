@@ -18,6 +18,7 @@ openbb-bls = "^1.2.0"
 openbb-cftc = "^1.2.0"
 openbb-congress-gov = "^1.1.0"
 openbb-econdb = "^1.4.0"
+openbb-estat = { path = "providers/estat", develop = true }
 openbb-federal-reserve = "^1.5.0"
 openbb-fmp = "^1.5.1"
 openbb-fred = "^1.5.0"

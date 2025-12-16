@@ -411,6 +411,77 @@ async def indicators(
 
 
 @router.command(
+    model="EstatSearch",
+    examples=[
+        APIEx(
+            parameters={"provider": "estat"},
+            description="Get a list of all available e-Stat datasets.",
+        ),
+        APIEx(
+            parameters={"query": "population census", "provider": "estat"},
+            description="Search for datasets related to population census.",
+        ),
+        APIEx(
+            parameters={"query": "consumer price", "limit": 10, "provider": "estat"},
+            description="Search for consumer price datasets, limited to 10 results.",
+        ),
+    ],
+)
+async def estat_search(
+    cc: CommandContext,
+    provider_choices: ProviderChoices,
+    standard_params: StandardParams,
+    extra_params: ExtraParams,
+) -> OBBject:
+    """Search e-Stat datasets by keyword.
+
+    Returns dataset metadata including IDs, titles, and descriptions.
+    Use the dataset_id from results to query data with estat_series().
+
+    Metadata including attribution notice is available in response.extra['results_metadata'].
+
+    Attribution: This service uses API functions from e-Stat,
+    however its contents are not guaranteed by government.
+    """
+    return await OBBject.from_query(Query(**locals()))
+
+
+@router.command(
+    model="EstatStatisticalData",
+    examples=[
+        APIEx(
+            parameters={"symbol": "0003433219", "provider": "estat"},
+            description="Get Japanese population statistics data.",
+        ),
+        APIEx(
+            parameters={
+                "symbol": "0003433219",
+                "area_code": "00000",
+                "provider": "estat",
+            },
+            description="Get data for a specific area code.",
+        ),
+    ],
+)
+async def estat_series(
+    cc: CommandContext,
+    provider_choices: ProviderChoices,
+    standard_params: StandardParams,
+    extra_params: ExtraParams,
+) -> OBBject:
+    """Get Japanese government statistical data from e-Stat.
+
+    e-Stat is the portal site for Japanese government statistics.
+    It provides access to economic, demographic, and social statistics
+    from various ministries and agencies.
+
+    Attribution: This service uses API functions from e-Stat,
+    however its contents are not guaranteed by government.
+    """
+    return await OBBject.from_query(Query(**locals()))
+
+
+@router.command(
     model="CentralBankHoldings",
     examples=[
         APIEx(
