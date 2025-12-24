@@ -1,0 +1,55 @@
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [26172]
+INFO:     Started server process [27957]
+INFO:     Waiting for application startup.
+INFO:
+
+                   ███╗
+  █████████████████╔══█████████████████╗       OpenBB Platform v4.4.5
+  ███╔══════════███║  ███╔══════════███║
+  █████████████████║  █████████████████║       Authentication: DISABLED
+  ╚═════════════███║  ███╔═════════════╝
+     ██████████████║  ██████████████╗
+     ███╔═══════███║  ███╔═══════███║
+     ██████████████║  ██████████████║
+     ╚═════════════╝  ╚═════════════╝
+Investment research for everyone, anywhere.
+
+    https://my.openbb.co/app/platform
+
+
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:46874 - "POST /api/v1/payday/users HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:46882 - "POST /api/v1/payday/users HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:34016 - "POST /api/v1/payday/users HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:34024 - "POST /api/v1/payday/users HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:34024 - "POST /api/v1/payday/applications HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:34024 - "POST /api/v1/payday/applications HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:34016 - "POST /api/v1/payday/repayments HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:34024 - "POST /api/v1/payday/repayments HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:38390 - "OPTIONS /api/v1/payday/users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38402 - "OPTIONS /api/v1/payday/users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38418 - "POST /api/v1/payday/users HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:38390 - "POST /api/v1/payday/users HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:38390 - "OPTIONS /api/v1/payday/applications HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38418 - "POST /api/v1/payday/applications HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:38418 - "POST /api/v1/payday/applications HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:38390 - "OPTIONS /api/v1/payday/repayments HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38418 - "OPTIONS /api/v1/payday/repayments HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38402 - "POST /api/v1/payday/repayments HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:38390 - "POST /api/v1/payday/repayments HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55734 - "OPTIONS /api/v1/payday/users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55748 - "OPTIONS /api/v1/payday/users HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55764 - "POST /api/v1/payday/users HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55734 - "POST /api/v1/payday/users HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55734 - "OPTIONS /api/v1/payday/applications HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55764 - "OPTIONS /api/v1/payday/applications HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55748 - "POST /api/v1/payday/applications HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55734 - "POST /api/v1/payday/applications HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55734 - "OPTIONS /api/v1/payday/repayments HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55748 - "OPTIONS /api/v1/payday/repayments HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55764 - "POST /api/v1/payday/repayments HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:55734 - "POST /api/v1/payday/repayments HTTP/1.1" 404 Not Found

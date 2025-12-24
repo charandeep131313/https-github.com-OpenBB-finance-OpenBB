@@ -61,3 +61,5 @@ obb/*
 *.pkg
 *.exe
 build/conda/tmp
+payday.db
+server.log
