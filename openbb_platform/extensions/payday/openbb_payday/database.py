@@ -18,9 +18,11 @@ def create_tables():
         """
         CREATE TABLE IF NOT EXISTS users (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            username TEXT NOT NULL UNIQUE,
-            hashed_password TEXT NOT NULL,
+            username TEXT UNIQUE,
+            hashed_password TEXT,
             email TEXT NOT NULL UNIQUE,
+            verification_token TEXT,
+            account_status TEXT NOT NULL DEFAULT 'pending',
             referral_code TEXT NOT NULL UNIQUE,
             referred_by TEXT
         )
@@ -40,6 +42,7 @@ def create_tables():
             loan_amount_requested REAL NOT NULL,
             loan_purpose TEXT NOT NULL,
             status TEXT NOT NULL,
+            total_repayment REAL,
             FOREIGN KEY (user_id) REFERENCES users (id)
         )
         """

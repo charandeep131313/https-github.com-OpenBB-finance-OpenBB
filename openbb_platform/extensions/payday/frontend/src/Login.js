@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { TextField, Button, Container, Typography } from '@mui/material';
+import { useAuth } from './AuthContext';
 
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const { login } = useAuth();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -13,6 +15,9 @@ const Login = () => {
             body: JSON.stringify({ username, password }),
         });
         const data = await response.json();
+        if (response.ok) {
+            login(data.user);
+        }
         console.log(data);
     };
 

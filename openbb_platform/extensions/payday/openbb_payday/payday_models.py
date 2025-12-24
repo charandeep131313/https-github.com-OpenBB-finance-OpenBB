@@ -28,10 +28,16 @@ class Repayment(BaseModel):
     date: date
 
 class Register(BaseModel):
-    username: str
-    password: str
     email: str
     referred_by: Optional[str] = None
+
+class Verify(BaseModel):
+    token: str
+
+class CompleteRegistration(BaseModel):
+    token: str
+    username: str
+    password: str
 
 class Login(BaseModel):
     username: str
@@ -56,3 +62,9 @@ class Applications(BaseModel):
 
 class Repayments(BaseModel):
     pass
+
+class ReferralCodeRequest(BaseModel):
+    user_id: int
+
+class UserApplicationsRequest(BaseModel):
+    user_id: int

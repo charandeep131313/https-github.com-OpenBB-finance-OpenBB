@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { TextField, Button, Container, Typography, Stepper, Step, StepLabel } from '@mui/material';
+import { TextField, Button, Container, Typography, Stepper, Step, StepLabel, CircularProgress } from '@mui/material';
+import { useAuth } from './AuthContext';
 
 const steps = ['Personal Information', 'Financial Information', 'Loan Details'];
 
 const ApplicationForm = () => {
+    const { user } = useAuth();
     const [activeStep, setActiveStep] = useState(0);
     const [formData, setFormData] = useState({
         full_name: '',
@@ -15,6 +17,9 @@ const ApplicationForm = () => {
         loan_amount_requested: '',
         loan_purpose: '',
     });
+    const [loading, setLoading] = useState(false);
+    const [message, setMessage] = useState('');
+    const [error, setError] = useState('');
 
     const handleNext = () => {
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -30,13 +35,22 @@ const ApplicationForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const response = await fetch(`${process.env.REACT_APP_API_URL}/payday/apply`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ ...formData, user_id: 1 }), // This should be replaced with the actual user ID
-        });
-        const data = await response.json();
-        console.log(data);
+        setLoading(true);
+        setError('');
+        if (user) {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/payday/apply`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ ...formData, user_id: user.id }),
+            });
+            const data = await response.json();
+            if (response.ok) {
+                setMessage(data.message);
+            } else {
+                setError(data.detail);
+            }
+        }
+        setLoading(false);
     };
 
     const getStepContent = (step) => {
@@ -81,23 +95,28 @@ const ApplicationForm = () => {
                     </Step>
                 ))}
             </Stepper>
-            <form onSubmit={handleSubmit}>
-                {getStepContent(activeStep)}
-                <div>
-                    <Button disabled={activeStep === 0} onClick={handleBack}>
-                        Back
-                    </Button>
-                    {activeStep === steps.length - 1 ? (
-                        <Button type="submit" variant="contained" color="primary">
-                            Submit
+            {error && <Typography color="error">{error}</Typography>}
+            {message ? (
+                <Typography>{message}</Typography>
+            ) : (
+                <form onSubmit={handleSubmit}>
+                    {getStepContent(activeStep)}
+                    <div>
+                        <Button disabled={activeStep === 0} onClick={handleBack}>
+                            Back
                         </Button>
-                    ) : (
-                        <Button variant="contained" color="primary" onClick={handleNext}>
-                            Next
-                        </Button>
-                    )}
-                </div>
-            </form>
+                        {activeStep === steps.length - 1 ? (
+                            <Button type="submit" variant="contained" color="primary" disabled={loading}>
+                                {loading ? <CircularProgress size={24} /> : 'Submit'}
+                            </Button>
+                        ) : (
+                            <Button variant="contained" color="primary" onClick={handleNext}>
+                                Next
+                            </Button>
+                        )}
+                    </div>
+                </form>
+            )}
         </Container>
     );
 };

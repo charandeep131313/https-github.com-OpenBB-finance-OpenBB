@@ -1,22 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Typography, Card, CardContent, Button, TextField } from '@mui/material';
+import { useAuth } from './AuthContext';
 
 const LoanStatus = () => {
+    const { user } = useAuth();
     const [applications, setApplications] = useState([]);
     const [repaymentAmount, setRepaymentAmount] = useState('');
 
     useEffect(() => {
         const fetchApplications = async () => {
-            const response = await fetch(`${process.env.REACT_APP_API_URL}/payday/applications`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ user_id: 1 }), // This should be replaced with the actual user ID
-            });
-            const data = await response.json();
-            setApplications(data.results);
+            if (user) {
+                const response = await fetch(`${process.env.REACT_APP_API_URL}/payday/user/applications`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ user_id: user.id }),
+                });
+                const data = await response.json();
+                setApplications(data);
+            }
         };
         fetchApplications();
-    }, []);
+    }, [user]);
 
     const handleRepayment = async (applicationId) => {
         const response = await fetch(`${process.env.REACT_APP_API_URL}/payday/repay`, {
